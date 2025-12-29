@@ -675,7 +675,7 @@ Contributions are welcome!
 
 
 ### Connect
-- **GitHub**: [@yapoorvamahadik](https://github.com/apoorvamahadik)
+- **GitHub**: [@apoorvamahadik](https://github.com/apoorvamahadik)
 - **Email**: mahadikapoorva245@gmail.com
 - **LinkedIn**: [Apoorva Mahadik](https://www.linkedin.com/in/apoorva-mahadik/)
 
