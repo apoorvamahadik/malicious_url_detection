@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Malicious URL Detector</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> Advanced URL Threat Detector</h1>
+            <p class="subtitle">Multi-class threat detection: Benign, Defacement, Phishing, Malware</p>
+            <div class="threat-indicators">
+                <span class="indicator benign"><i class="fas fa-check-circle"></i> Benign</span>
+                <span class="indicator defacement"><i class="fas fa-exclamation-triangle"></i> Defacement</span>
+                <span class="indicator phishing"><i class="fas fa-fish"></i> Phishing</span>
+                <span class="indicator malware"><i class="fas fa-bug"></i> Malware</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="dashboard">
+                <div class="input-section">
+                    <h2><i class="fas fa-link"></i> Check Single URL</h2>
+                    <div class="input-group">
+                        <input type="text" id="urlInput" placeholder="Enter URL (e.g., https://example.com)">
+                        <button id="checkBtn" onclick="checkURL()">
+                            <i class="fas fa-search"></i> Analyze URL
+                        </button>
+                    </div>
+                    
+                    <div class="batch-section">
+                        <h3><i class="fas fa-list"></i> Batch Analysis</h3>
+                        <textarea id="batchInput" placeholder="Enter multiple URLs (one per line, max 50)"></textarea>
+                        <button onclick="checkBatchURLs()">
+                            <i class="fas fa-tasks"></i> Analyze All URLs
+                        </button>
+                    </div>
+                    
+                    <div class="sample-urls">
+                        <h4><i class="fas fa-vial"></i> Try Sample URLs:</h4>
+                        <div class="sample-buttons">
+                            <button class="sample-btn benign" onclick="useSample('https://google.com')">
+                                Safe (Google)
+                            </button>
+                            <button class="sample-btn phishing" onclick="useSample('http://phishingsite-example.com/login')">
+                                Phishing Example
+                            </button>
+                            <button class="sample-btn malware" onclick="useSample('http://malware-download-example.com/install.exe')">
+                                Malware Example
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-section" id="resultSection" style="display: none;">
+                    <h2><i class="fas fa-chart-bar"></i> Analysis Results</h2>
+                    <div id="resultContainer"></div>
+                </div>
+
+                <div class="stats-section">
+                    <h2><i class="fas fa-chart-pie"></i> Threat Statistics</h2>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon benign">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Benign</h3>
+                                <p class="stat-count">428,103</p>
+                                <p class="stat-desc">Safe URLs in dataset</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon defacement">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Defacement</h3>
+                                <p class="stat-count">96,457</p>
+                                <p class="stat-desc">Hacked websites</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon phishing">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Phishing</h3>
+                                <p class="stat-count">94,111</p>
+                                <p class="stat-desc">Credential theft sites</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon malware">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Malware</h3>
+                                <p class="stat-count">32,520</p>
+                                <p class="stat-desc">Malware distribution</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2><i class="fas fa-info-circle"></i> Threat Information</h2>
+                    <div class="info-grid">
+                        <div class="info-card benign">
+                            <h3><i class="fas fa-check-circle"></i> Benign</h3>
+                            <p>Legitimate websites with no malicious content. Safe for browsing.</p>
+                        </div>
+                        <div class="info-card defacement">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Defacement</h3>
+                            <p>Websites that have been hacked and modified without authorization.</p>
+                        </div>
+                        <div class="info-card phishing">
+                            <h3><i class="fas fa-fish"></i> Phishing</h3>
+                            <p>Fraudulent sites designed to steal personal information and credentials.</p>
+                        </div>
+                        <div class="info-card malware">
+                            <h3><i class="fas fa-bug"></i> Malware</h3>
+                            <p>Sites distributing malicious software like viruses and ransomware.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-database"></i> Dataset</h4>
+                    <p>651,191 URLs with 4 threat categories</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-brain"></i> Model</h4>
+                    <p>Logistic Regression with TF-IDF features</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-code"></i> Technology</h4>
+                    <p>Python, Scikit-learn, Flask, JavaScript</p>
+                </div>
+            </div>
+            <p class="copyright">
+                Advanced URL Threat Detector &copy; 2024 | 
+                <a href="https://github.com/yourusername/malicious-url-detector" target="_blank">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
